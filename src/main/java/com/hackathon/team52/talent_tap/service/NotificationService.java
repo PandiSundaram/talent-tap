@@ -4,7 +4,6 @@ import com.hackathon.team52.talent_tap.entity.TalentInfo;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,10 @@ public class NotificationService {
     @Autowired
      private JavaMailSender mailSender;
 
-    @Value("${twilio.account.sid}")
-    private String accountSid;
+    // Find your Account Sid and Token at twilio.com/console
+    public static final String ACCOUNT_SID = "AC08ea0c73c68afadbfa84e908b04ec4c3";
+    public static final String AUTH_TOKEN = "0a1dfbc3b0e8fd506b5bb0ab06b0bba7";
 
-    @Value("${twilio.auth.token}")
-    private String authToken;
 
     public NotificationService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
@@ -46,7 +44,7 @@ public class NotificationService {
     public void sendWhatsApp(String firstName,String round, String status,String phone){
         String messageText = String.format("Greetings from UPS,\n\nDear %s,\n\nYou have been %s in the %s round discussion. Please feel free to reach out for further details.\n\nContact:1800-22-7171", firstName, status, round);
 
-        Twilio.init(accountSid, authToken);
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber("whatsapp:+919500376088"),
                 new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
