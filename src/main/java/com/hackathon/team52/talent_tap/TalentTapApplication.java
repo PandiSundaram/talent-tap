@@ -25,6 +25,4 @@ public class TalentTapApplication {
 		System.out.println(talentInfos.get(0).toString());
 		return talentInfos;
 	}
-
-
 }

@@ -25,7 +25,7 @@ public class TalentRegisterService {
     NotificationService notificationService;
 
 
-    private final List<Customer> customerList = Arrays.asList(new Customer("pandi","pandi123"),new Customer("boojith","boojith123"),new Customer("nivetha","nivetha123"));
+    private final List<Customer> customerList = Arrays.asList(new Customer("pandi@ups.com","pandi123"),new Customer("boojith@ups.com","boojith123"),new Customer("nivetha@ups.com","nivetha123"));
 
 
     private Long candidateId;
@@ -55,7 +55,7 @@ public class TalentRegisterService {
             talentInfo.setReferrerId(registerForm.getReferrerId());
             talentInfo.setJobId(registerForm.getJobId());
             talentInfo.setResumeName(registerForm.getResumeName());
-            talentInfo.setStatus("APPLIED");
+            talentInfo.setStatus("Applied");
 
             talentRepo.save(talentInfo);
 
@@ -110,16 +110,11 @@ public class TalentRegisterService {
                 talentInfo.get().setRounds(editFormList.get(i).getRounds());
                 talentInfo.get().setStatus(editFormList.get(i).getStatus());
                 updateInfo.add(talentInfo.get());
-                //notificationService.sendMessageToExternalApp(editFormList.get(i).getRounds(),editFormList.get(i).getStatus());
-
+                notificationService.sendMessageToExternalApp(editFormList.get(i).getFirstName(), editFormList.get(i).getRounds(),editFormList.get(i).getStatus(),editFormList.get(i).getEmail());
+                notificationService.sendWhatsApp(editFormList.get(i).getFirstName(), editFormList.get(i).getRounds(),editFormList.get(i).getStatus(),editFormList.get(i).getPhoneNumber());
             }
 
-
             updateInfo = talentRepo.saveAll(updateInfo);
-
-
-
-
         } catch (Exception e) {
             e.getMessage();
 
@@ -131,8 +126,4 @@ public class TalentRegisterService {
     public List<TalentInfo> persistDefaultTalentInfo(){
        return Arrays.asList(new TalentInfo(10l,"pandi","sundaram","pandi@ups.com","9787675667","87877","1234","pandi.pdf","APPLIED",null));
     }
-
-
-
-
 }
