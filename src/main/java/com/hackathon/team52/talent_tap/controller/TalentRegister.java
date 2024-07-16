@@ -35,7 +35,7 @@ public class TalentRegister {
 
     // Find your Account Sid and Token at twilio.com/console
     public static final String ACCOUNT_SID = "AC08ea0c73c68afadbfa84e908b04ec4c3";
-    public static final String AUTH_TOKEN = "f09516db676e1a27e49016783369d643";
+    public static final String AUTH_TOKEN = "0a1dfbc3b0e8fd506b5bb0ab06b0bba7";
 
     @PostMapping("/loginuser")
     public Boolean loginUser(@RequestBody Customer customer) {
